@@ -1,0 +1,28 @@
+%Détection des points de Harris
+.\Harris.exe HARRIS image027.ssech4.tif image027.ssech4.ptshar
+.\Harris.exe HARRIS image028.ssech4.tif image028.ssech4.ptshar
+
+%Visualiser les points d'intérêt détectés
+.\viewer.exe image027.ssech4.ptshar image027.ssech4.tif
+.\viewer.exe image028.ssech4.ptshar image028.ssech4.tif
+
+%Mise en correspondance de ces points par corrélation
+.\Harris.exe APPARIEMENT image027.ssech4.tif image028.ssech4.tif image027.ssech4.ptshar image028.ssech4.ptshar image027.-.image028.resulthar
+
+%Afficher ce résultat
+.\viewer.exe image027.-.image028.resulthar image027.ssech4.tif image028.ssech4.tif
+
+%Filtrage des erreurs par considération du voisinage
+.\FiltreVoisinage.exe image027.-.image028.resulthar image027.-.image028.resultharf
+
+%Afficher ce résultat
+.\viewer.exe image027.-.image028.resultharf image027.ssech4.tif image028.ssech4.tif
+
+
+%Meme chose avec sift
+.\siftpp_tgi.exe image027.ssech4.tif
+.\siftpp_tgi.exe image028.ssech4.tif
+.\ann_lowe.exe --kp1 image027.ssech4.key --kp2 image028.ssech4.key --result image027.-.image028.resultsift
+
+%Afficher ce résultat
+.\viewer.exe image027.-.image028.resultsift image027.ssech4.tif image028.ssech4.tif
